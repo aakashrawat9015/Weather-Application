@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+body{
+  @apply bg-[#0B0F1A] min-h-screen;
+}
+
+.minimal-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Vertical scrollbar width */
+  height: 6px; /* Horizontal scrollbar height */
+}
+
+.minimal-scrollbar::-webkit-scrollbar-track {
+  background: #4a8ade; 
+  border-radius: 10px;
+}
+
+.minimal-scrollbar::-webkit-scrollbar-thumb {
+  background: #6366f1; /* Thumb color: Indigo-500 */
+  border-radius: px;
+}
+
+.minimal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #000000; /* Darker on hover for better visibility */
+}
+
+/* Fallback for Firefox */
+.minimal-scrollbar {
+  scrollbar-width: thin; /* 'auto' or 'thin' */
+  scrollbar-color: #30303d #5391f5; /* thumb color track color */
+  
+}
