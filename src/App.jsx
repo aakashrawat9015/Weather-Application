@@ -1,20 +1,33 @@
 import { Suspense, useState } from 'react';
-import Navbar from './components/navbar/Navbar.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 import Map from './components/Map/Map.jsx';
 import WeatherContent from './WeatherContent.jsx';
-import CurrentSkeleton from './components/skeleton/CurrentSkeleton.jsx';
+import Layout from './components/api/Sidebar/Layout.jsx';
 function App() {
-  const [coords, setCoords] = useState({ lat: 28.644800, lon: 77.216721 });
+  const [coords, setCoords, name] = useState(
+    {
+      lat: 28.644800,
+      lon: 77.216721,
+      name: 'New Delhi, India'
+    });
+
+  const handleLocationChange = ({ lat, lon, name }) => {
+    setCoords({ lat, lon, name });
+  };
+
+
 
   return (
     <>
-      <Navbar onSelectLocation={setCoords} />
+      <Navbar onSelectLocation={handleLocationChange} />
+      {/* <Layout/> */}
 
-      <div className="rounded-xl shadow-lg overflow-hidden border border-gray-700 flex justify-center mt-4 mx-auto" style={{ maxWidth: '800px' }}>
-        <Map lat={coords.lat} lon={coords.lon} onLocationChange={setCoords} />
+      <div className='pt-20'><div className="rounded-xl shadow-lg overflow-hidden border border-gray-700 flex justify-center mt-4 mx-auto z-0" style={{ maxWidth: '769px' }}>
+        <Map lat={coords.lat} lon={coords.lon} onLocationChange={handleLocationChange} />
       </div>
 
-      <WeatherContent key={`${coords.lat}-${coords.lon}`} coords={coords} />
+        <WeatherContent key={`${coords.lat}-${coords.lon}`} coords={coords} />
+      </div>
 
     </>
   );

@@ -1,19 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+.leaflet-container {
+  z-index: 0 !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
-body{
+body {
   @apply bg-[#0B0F1A] min-h-screen;
 }
 
 .minimal-scrollbar::-webkit-scrollbar {
-  width: 6px; /* Vertical scrollbar width */
-  height: 6px; /* Horizontal scrollbar height */
+  width: 6px;
+  /* Vertical scrollbar width */
+  height: 6px;
+  /* Horizontal scrollbar height */
 }
 
 .minimal-scrollbar::-webkit-scrollbar-track {
-  background: #3df904; 
+  background: #3df904;
   border-radius: 10%;
 }
 
@@ -23,13 +29,16 @@ body{
 }
 
 .minimal-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #3f08f4; /* Darker on hover for better visibility */
+  background: #3f08f4;
+  /* Darker on hover for better visibility */
 }
 
 /* Fallback for Firefox */
 .minimal-scrollbar {
-  scrollbar-width: thin; /* 'auto' or 'thin' */
-  scrollbar-color: #5e5eb8 #181b23; /* thumb color track color */
+  scrollbar-width: thin;
+  /* 'auto' or 'thin' */
+  scrollbar-color: #5e5eb8 #181b23;
+  /* thumb color track color */
 
 }
 
@@ -144,6 +153,7 @@ body{
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -4,6 +4,5 @@ export const fetchAQIData = async ({ lat, lon }) => {
   );
   if (!response.ok) throw new Error("Failed to fetch air quality data");
   const res = await response.json();
-  console.log(res);
   return res;
 };

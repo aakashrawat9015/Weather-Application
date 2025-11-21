@@ -4,25 +4,34 @@ function LocationSearch({ onSelectLocation }) {
   const [locationInput, setLocationInput] = useState('');
 
   const handleSearch = async () => {
-    if (!locationInput.trim()) return;
+    const query = locationInput.trim();
+    if (!query) {
+      alert('Please enter a location name.');
+      return;
+    }
 
-    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${locationInput}`);
-    const results = await response.json();
-    // console.log(results);
-    // console.log(results[0].display_name);
-    const locationName = results[0].display_name;
-    
-    if (results.length > 0) {
-      const { lat, lon } = results[0];
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`);
+      const results = await response.json();
+
+      if (!Array.isArray(results) || results.length === 0) {
+        alert('Location not found. Try a more specific name.');
+        return;
+      }
+
+      const { lat, lon, display_name } = results[0];
       const latNum = parseFloat(lat);
       const lonNum = parseFloat(lon);
-      onSelectLocation({ lat: latNum, lon: lonNum, name: locationName });
-      console.log('Selected location:', { lat: latNum, lon: lonNum });
-      
-    } else {
-      alert('Location not found');
+
+      onSelectLocation({ lat: latNum, lon: lonNum, name: display_name });
+      console.log('Selected location:', { lat: latNum, lon: lonNum, name: display_name });
+
+    } catch (error) {
+      console.error('Search failed:', error);
+      alert('Something went wrong while searching. Please try again.');
     }
   };
+
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -31,7 +40,7 @@ function LocationSearch({ onSelectLocation }) {
   };
 
   return (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-4 fixed">
       <input
         type="text"
         value={locationInput}
@@ -44,7 +53,7 @@ function LocationSearch({ onSelectLocation }) {
         onClick={handleSearch}
         className="px-4 py-2 rounded-r bg-blue-600 text-white hover:bg-blue-700"
       >
-        Search
+        <i className="fas fa-search"></i>
       </button>
     </div>
   );

@@ -1,7 +1,20 @@
 import React from 'react';
 import Card from './Card';
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { fetchWeatherData } from '../api/api.js';
+// import { fetchAQIData } from '../api/AqiData.js';
 
-const HourlyForecast = ({ data, title = "Hourly Forecast" }) => {
+const HourlyForecast = ({ coords, title = "Hourly Forecast" }) => {
+
+  const { data } = useSuspenseQuery({
+      queryKey: ['weather', coords.lat, coords.lon],
+      queryFn: () => fetchWeatherData({ lat: coords.lat, lon: coords.lon }),
+    });
+  
+    // const { data: aqiData } = useSuspenseQuery({
+    //   queryKey: ['aqi', coords.lat, coords.lon],
+    //   queryFn: () => fetchAQIData({ lat: coords.lat, lon: coords.lon }),
+    // });
   if (!data?.hourly?.time) {
     return (
       <Card title={title}>
@@ -23,10 +36,10 @@ const HourlyForecast = ({ data, title = "Hourly Forecast" }) => {
     hour12: false,
   });
 
-  const formatted = now.slice(0, 10);
+  // const formatted = now.slice(0, 10);
   // const idx = times.findIndex(t => t.startsWith(formatted));
 
-  console.log(formatted);
+  // console.log(formatted);
 
   const endIndex = Math.min(startIndex + 24, times.length);
   const sliceTimes = times.slice(startIndex, endIndex);
@@ -42,8 +55,8 @@ const HourlyForecast = ({ data, title = "Hourly Forecast" }) => {
                 key={date}
                 className="min-w-[120px] rounded-lg p-2 text-center shadow-lg border border-gray-700/60 hover:bg-gray-700/20"
               >
-                <p className="text-sm font-medium">{date.slice(11, 16)}</p>
-                <p className="text-lg font-bold">{data.hourly.temperature_2m[idx]}°C</p>
+                <p className="text-sm font-medium"><span>{date.slice(11, 16)}</span></p>
+                <p className="text-lg font-bold"><span className='text-white'>{data.hourly.temperature_2m[idx]}°C</span></p>
                 <p className="text-xs">{data.hourly.relative_humidity_2m[idx]}% Humidity</p>
                 <p className="text-xs">{data.hourly.wind_speed_10m[idx]} km/h Wind</p>
               </div>

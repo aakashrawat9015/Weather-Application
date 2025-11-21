@@ -1,7 +1,20 @@
 import React from 'react';
 import Card from './Card';
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { fetchWeatherData } from '../api/api.js';
+// import { fetchAQIData } from '../api/AqiData.js';
 
-const DailyForecast = ({ data, title = "Daily Forecast", scrollDirection = "vertical" }) => {
+const DailyForecast = ({ coords, title = "Daily Forecast", scrollDirection = "horizontal" }) => {
+
+  const { data } = useSuspenseQuery({
+    queryKey: ['weather', coords.lat, coords.lon],
+    queryFn: () => fetchWeatherData({ lat: coords.lat, lon: coords.lon }),
+  });
+
+  // const { data: aqiData } = useSuspenseQuery({
+  //   queryKey: ['aqi', coords.lat, coords.lon],
+  //   queryFn: () => fetchAQIData({ lat: coords.lat, lon: coords.lon }),
+  // });
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
     const dayName = date.toLocaleDateString('en-US', { weekday: 'short' }); // e.g., Mon
