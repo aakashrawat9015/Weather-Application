@@ -2,7 +2,7 @@ import { Suspense, useState } from 'react';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Map from './components/Map/Map.jsx';
 import WeatherContent from './WeatherContent.jsx';
-import Layout from './components/api/Sidebar/Layout.jsx';
+
 function App() {
   const [coords, setCoords, name] = useState(
     {
@@ -20,11 +20,12 @@ function App() {
   return (
     <>
       <Navbar onSelectLocation={handleLocationChange} />
-      {/* <Layout/> */}
+  
 
-      <div className='pt-20'><div className="rounded-xl shadow-lg overflow-hidden border border-gray-700 flex justify-center mt-4 mx-auto z-0" style={{ maxWidth: '769px' }}>
-        <Map lat={coords.lat} lon={coords.lon} onLocationChange={handleLocationChange} />
-      </div>
+      <div className='pt-20'>
+        <div className="rounded-xl shadow-lg overflow-hidden flex justify-center mt-4 mx-auto z-0" style={{ maxWidth: '769px' }}>
+          <Map lat={coords.lat} lon={coords.lon} onLocationChange={handleLocationChange} />
+        </div>
 
         <WeatherContent key={`${coords.lat}-${coords.lon}`} coords={coords} />
       </div>
