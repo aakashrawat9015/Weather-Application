@@ -18,7 +18,7 @@ const HourlyForecast = ({ coords, title = "Hourly Forecast" }) => {
   if (!data?.hourly?.time) {
     return (
       <Card title={title}>
-        <div className="text-white text-center p-4">Loading hourly forecast...</div>
+        <div className="text-card-foreground text-center p-4">Loading hourly forecast...</div>
       </Card>
     );
   }
@@ -46,17 +46,17 @@ const HourlyForecast = ({ coords, title = "Hourly Forecast" }) => {
 
   return (
     <Card data={data} title={title}>
-      <div className="text-white overflow-x-auto minimal-scrollbar">
+      <div className="text-card-foreground overflow-x-auto minimal-scrollbar">
         <div className="flex gap-4 px-2 py-2 min-w-max">
           {sliceTimes.map((date, i) => {
             const idx = startIndex + i;
             return (
               <div
                 key={date}
-                className="min-w-[120px] rounded-lg p-2 text-center shadow-lg border border-gray-700/60 hover:bg-gray-700/20"
+                className="min-w-[100px] sm:min-w-[120px] rounded-lg p-2 sm:p-3 text-center shadow-lg border border-border hover:bg-accent hover:text-accent-foreground"
               >
-                <p className="text-sm font-medium"><span>{date.slice(11, 16)}</span></p>
-                <p className="text-lg font-bold"><span className='text-white'>{data.hourly.temperature_2m[idx]}°C</span></p>
+                <p className="text-xs sm:text-sm font-medium"><span>{date.slice(11, 16)}</span></p>
+                <p className="text-base sm:text-lg font-bold"><span className='text-card-foreground'>{data.hourly.temperature_2m[idx]}°C</span></p>
                 <p className="text-xs">{data.hourly.relative_humidity_2m[idx]}% Humidity</p>
                 <p className="text-xs">{data.hourly.wind_speed_10m[idx]} km/h Wind</p>
               </div>

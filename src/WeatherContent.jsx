@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import DailySkeleton from "./components/skeleton/DailySkeleton.jsx";
 import CurrentSkeleton from "./components/skeleton/CurrentSkeleton.jsx";
 import HourlySkeleton from "./components/skeleton/HourlySkeleton.jsx";
+import AqiSkeleton from "./components/skeleton/AqiSkeleton.jsx";
 import AdditionalInfo from "./components/card/AdditionalInfo.jsx";
 
 
@@ -18,7 +19,9 @@ function WeatherContent({ coords }) {
 
       {/* <Suspense fallback={<HourlySkeleton />}>
       </Suspense> */}
-      <AdditionalInfo coords={coords} />
+      <Suspense fallback={<AqiSkeleton />}>
+        <AdditionalInfo coords={coords} />
+      </Suspense>
 
       <Suspense fallback={<HourlySkeleton />}>
         <HourlyForecast coords={coords} />

@@ -58,28 +58,28 @@ const CurrentTemp = ({ coords, locationName }) => {
   return (
     <Card>
       {/* Title row with title, location, and date */}
-      <div className="flex items-center gap-10 mb-4">
-        <h2 className="text-xl font-bold text-white">{title}</h2>
-        <p className="text-sm font-semibold text-gray-300">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 mb-4">
+        <h2 className="text-lg sm:text-xl font-bold text-card-foreground">{title}</h2>
+        <p className="text-xs sm:text-sm font-semibold text-muted-foreground truncate">
           {locationName || coords.name || "Unknown Location"}
         </p>
       </div>
 
       {/* Main content centered */}
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-3 sm:gap-4">
         <WeatherIcon
           code={data?.current?.weather_code}
           isDay={data?.current?.is_day}
           size="6xl"
         />
-        <p className="text-6xl text-blue-200 font-bold">
+        <p className="text-5xl sm:text-6xl lg:text-7xl text-blue-200 font-bold">
           {typeof data?.current?.temperature_2m === "number"
             ? Math.round(data.current.temperature_2m)
             : "N/A"}
           °C
         </p>
         {/* Time directly below temperature */}
-        <p className="text-sm text-gray-300">{time}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground text-center px-2">{time}</p>
       </div>
     </Card>
   );

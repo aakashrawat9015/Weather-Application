@@ -8,7 +8,7 @@
 @custom-variant dark (&:is(.dark *));
 
 body {
-  @apply bg-[#0B0F1A] min-h-screen;
+  @apply bg-background text-foreground min-h-screen;
 }
 
 .minimal-scrollbar::-webkit-scrollbar {

@@ -22,8 +22,8 @@ function App() {
       <Navbar onSelectLocation={handleLocationChange} />
   
 
-      <div className='pt-20'>
-        <div className="rounded-xl shadow-lg overflow-hidden flex justify-center mt-4 mx-auto z-0" style={{ maxWidth: '769px' }}>
+      <div className='pt-24 md:pt-20 px-4'>
+        <div className="rounded-xl shadow-lg overflow-hidden flex justify-center mt-4 mx-auto z-0 max-w-full sm:max-w-2xl lg:max-w-3xl">
           <Map lat={coords.lat} lon={coords.lon} onLocationChange={handleLocationChange} />
         </div>
 

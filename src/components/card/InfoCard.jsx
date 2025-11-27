@@ -1,10 +1,11 @@
-const InfoCard = ({ label, value, unit, color = "text-white", children }) => {
+const InfoCard = ({ label, value, unit, color = "text-card-foreground", children }) => {
   return (
     <div className="flex flex-col items-center justify-center 
-                    px-4 py-3 mx-w-xs p-3 rounded-lg shadow-md
-                    bg-linear-to-br from-gray-800 via-gray-900 to-gray-900">
-      <p className="text-sm font-semibold text-gray-300">{label}</p>
-      <p className={`text-lg font-bold ${color}`}>
+                    px-3 sm:px-4 py-2 sm:py-3 mx-w-xs rounded-lg shadow-md
+                    bg-muted border border-border
+                    min-w-[100px] sm:min-w-[120px]">
+      <p className="text-xs sm:text-sm font-semibold text-muted-foreground">{label}</p>
+      <p className={`text-base sm:text-lg font-bold ${color}`}>
         {value !== null && value !== undefined ? `${value}${unit || ""}` : "N/A"}
       </p>
       {children}
