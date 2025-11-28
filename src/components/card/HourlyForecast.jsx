@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './Card';
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchWeatherData } from '../api/api.js';
+import HourlyTempChart from './HourlyTempChart.jsx';
 // import { fetchAQIData } from '../api/AqiData.js';
 
 const HourlyForecast = ({ coords, title = "Hourly Forecast" }) => {
@@ -10,7 +11,7 @@ const HourlyForecast = ({ coords, title = "Hourly Forecast" }) => {
       queryKey: ['weather', coords.lat, coords.lon],
       queryFn: () => fetchWeatherData({ lat: coords.lat, lon: coords.lon }),
     });
-  
+
     // const { data: aqiData } = useSuspenseQuery({
     //   queryKey: ['aqi', coords.lat, coords.lon],
     //   queryFn: () => fetchAQIData({ lat: coords.lat, lon: coords.lon }),
@@ -46,6 +47,8 @@ const HourlyForecast = ({ coords, title = "Hourly Forecast" }) => {
 
   return (
     <Card data={data} title={title}>
+      <HourlyTempChart coords={coords} title={title} />
+      
       <div className="text-card-foreground overflow-x-auto minimal-scrollbar">
         <div className="flex gap-4 px-2 py-2 min-w-max">
           {sliceTimes.map((date, i) => {
