@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/openaq": {
+        target: "https://api.openaq.org",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/openaq/, "")
+      }
+    }
+  }
 })

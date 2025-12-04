@@ -1,6 +1,8 @@
+
 export const fetchAQIData = async ({ lat, lon }) => {
+  const API_KEY = import.meta.env.VITE_WAQI_API_KEY;
   const response = await fetch(
-    `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm10,pm2_5,us_aqi&current=us_aqi&timezone=auto`
+    `https://api.waqi.info/feed/geo:${lat};${lon}/?token=${API_KEY}`
   );
   if (!response.ok) throw new Error("Failed to fetch air quality data");
   const res = await response.json();
