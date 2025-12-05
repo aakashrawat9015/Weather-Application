@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "./Card";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchWeatherData } from "../api/api.js";
 import {
@@ -47,63 +46,64 @@ const HourlyTempChart = ({ coords }) => {
   const xAxisInterval = isMobile ? 2 : 0; // skip ticks on mobile
 
   return (
-    <Card data={data}>
-      <div className="h-50 sm:h-70 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            data={chartData}
-            margin={{ top: 10, right: 10, left: 10, bottom: 20 }} // give space for Y-axis label
+    <div className="w-full h-64 sm:h-80 min-w-0 min-h-0">
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart
+          data={chartData}
+          margin={{ top: 10, right: 10, left: 10, bottom: 20 }} // give space for Y-axis label
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" vertical={false} />
+          <XAxis
+            dataKey="time"
+            stroke={textColor}
+            tick={{ fill: textColor, fontSize: tickFontSize }}
+            interval={xAxisInterval}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" vertical={false} />
-            <XAxis
-              dataKey="time"
-              stroke={textColor}
-              tick={{ fill: textColor, fontSize: tickFontSize }}
-              interval={xAxisInterval}
-            >
-              <Label
-                value="Time (hours)"
-                position="bottom"
-                fill={textColor}
-                style={{ fontSize: labelFontSize }}
-              />
-            </XAxis>
-            <YAxis
-              unit="°C"
-              stroke={textColor}
-              tick={{ fill: textColor, fontSize: tickFontSize }}
-            >
-              <Label
-                value="Temperature (°C)"
-                angle={-90}
-                position="left"   // use "left" instead of "insideLeft"
-                fill={textColor}
-                style={{ fontSize: labelFontSize }}
-              />
-            </YAxis>
-            <Tooltip
-              contentStyle={{
-                background: isDark ? "rgba(30,30,30,0.9)" : "rgba(255,255,255,0.9)",
-                color: textColor,
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                padding: "6px",
-                fontSize: tickFontSize,
-              }}
-              formatter={(value) => [`${value}°C`]}
-              labelFormatter={(label) => `${label}`}
+            <Label
+              value="Time (hours)"
+              position="bottom"
+              fill={textColor}
+              style={{ fontSize: labelFontSize }}
             />
-            <Area
-              type="monotone"
-              dataKey="temp"
-              stroke="#3b82f6"
-              fill="#bfdbfe"
-              name="Temperature"
+          </XAxis>
+          <YAxis
+            unit="°C"
+            stroke={textColor}
+            tick={{ fill: textColor, fontSize: tickFontSize }}
+          >
+            <Label
+              value="Temperature (°C)"
+              angle={-90}
+              position="left"   // use "left" instead of "insideLeft"
+              fill={textColor}
+              style={{ fontSize: labelFontSize }}
             />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-    </Card>
+          </YAxis>
+          <Tooltip
+            // larger text for tooltip values and remove the time label
+            contentStyle={{
+              background: isDark ? "rgba(30,30,30,0.95)" : "rgba(255,255,255,0.95)",
+              color: textColor,
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              padding: "8px 10px",
+            }}
+            itemStyle={{ color: textColor, fontSize: 16, fontWeight: 700 }}
+            labelStyle={{ display: "none" }}
+            // return empty name so series label doesn't show, and hide the time label
+            formatter={(value) => [`${value}°C`]}
+            labelFormatter={() => ""}
+          />
+          <Area
+            type="monotone"
+            dataKey="temp"
+            stroke="#3b82f6"
+            fill="#bfdbfe"
+            name="Temperature"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

@@ -32,6 +32,7 @@ const AdditionalInfo = ({ coords }) => {
         timeZone: timezone || 'UTC'
       });
     } catch (e) {
+      console.log(e);
       return "N/A";
     }
   };

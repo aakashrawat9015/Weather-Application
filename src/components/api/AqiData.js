@@ -14,6 +14,6 @@ export const fetchAQIData = async ({ lat, lon }) => {
     throw new Error(`API Error: ${res.data}`);
   }
 
-  console.log("WAQI Output:", JSON.stringify(res, null, 2));
+  // console.log("WAQI Output:", JSON.stringify(res, null, 2));
   return res;
 };
