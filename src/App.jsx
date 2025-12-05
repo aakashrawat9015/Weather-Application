@@ -4,7 +4,7 @@ import Map from './components/Map/Map.jsx';
 import WeatherContent from './WeatherContent.jsx';
 
 function App() {
-  const [coords, setCoords, name] = useState(
+  const [coords, setCoords] = useState(
     {
       lat: 28.644800,
       lon: 77.216721,

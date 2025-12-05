@@ -4,7 +4,7 @@ import InfoCard from './InfoCard.jsx';
 import WeatherIcon from '../WeatherIcon/WeatherIcon';
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchWeatherData } from '../api/api.js';
-import { fetchAQIData } from '../api/AqiData.js';
+
 import AqiInfo from '../AqiInfo/AqiInfo.jsx';
 
 const CurrentTemp = ({ coords, locationName }) => {

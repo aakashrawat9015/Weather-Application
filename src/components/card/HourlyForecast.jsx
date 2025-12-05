@@ -47,6 +47,7 @@ const HourlyForecast = ({ coords, title = "Hourly Forecast" }) => {
 
   return (
     <Card data={data} title={title}>
+      {/* hourly chart goes here */}
       <HourlyTempChart coords={coords} title={title} />
       
       <div className="text-card-foreground overflow-x-auto minimal-scrollbar">

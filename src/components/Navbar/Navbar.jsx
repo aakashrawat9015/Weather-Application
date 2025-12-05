@@ -29,7 +29,7 @@ const Navbar = ({ onSelectLocation, locationName }) => {
       {/* Flex container spans full width, no mx-auto */}
       <div className="flex items-center justify-between px-4 py-3 sm:h-20">
         {/* Left: Branding pinned to left edge */}
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <p className="text-foreground text-lg sm:text-xl font-semibold tracking-wide whitespace-nowrap">
             Weather<span className="text-blue-500">Check</span>
           </p>
@@ -43,7 +43,7 @@ const Navbar = ({ onSelectLocation, locationName }) => {
         </div>
 
         {/* Right: location name + theme toggle + search icon (≤550px) */}
-        <div className="flex items-center gap-3 flex-shrink-0" ref={searchRef}>
+        <div className="flex items-center gap-3 shrink-0" ref={searchRef}>
           <div className="hidden min-[551px]:block text-right">
             <p className="text-sm text-muted-foreground">{locationName ?? ""}</p>
           </div>

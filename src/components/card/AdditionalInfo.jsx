@@ -43,9 +43,6 @@ const AdditionalInfo = ({ coords }) => {
 
   return (
     <>
-      {/* AQI */}
-      <AqiInfo aqiData={aqiData} />
-
       {/* Additional Info in one Card */}
       <Card>
         <div className="flex flex-row flex-wrap gap-3 sm:gap-4 justify-center items-center">
@@ -82,6 +79,11 @@ const AdditionalInfo = ({ coords }) => {
           />
         </div>
       </Card>
+
+
+      {/* AQI */}
+      <AqiInfo aqiData={aqiData} />
+
     </>
   );
 };
